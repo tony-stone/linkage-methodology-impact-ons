@@ -1,3 +1,3 @@
-# Presentation template
+# ADR UK Conf 2023 Presentation
 
-A template repository for presentations (with ECHILD logo).
+A repository for ADR UK conference 2023 presentation.
