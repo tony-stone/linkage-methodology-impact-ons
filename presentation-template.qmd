@@ -1,8 +1,8 @@
 ---
 title: "Presentation title"
 subtitle: "Presentation subtitle"
-author: "Tony Stone"
-date: 2023-09-21
+author: "Tony Stone, UCL / Unversity of Sheffield"
+date: 2023-11-16
 date-format: "D MMM YYYY"
 format: 
   revealjs:
@@ -22,18 +22,276 @@ A [link](https://www.github.com/UCL-ECHILD)
     
 * list item 1
     * sublist item 1
+    
+> A quote
+> 
+> --_(with attribution)^[And a footnote.]_
+
 
 ::: {.notes}
 Slide notes
 :::
 
+## HES datasets {.smaller}
 
-## Slide 2 background colour {background-color="#e3fdf6"}
+Care funded by the English NHS or taking place in a NHS funded hospital in 
+England.
+
+### Admitted patient care
+
+Admitted to hospital
+Since 1989 but NHS Number only mandated since 1997
+
+### Outpatient appointments
+
+Since 2003
+
+### Accident and Emergency
+
+Non-admitted unscheduled care
+
++ ED + UCC
++ MIU
++ WIC
+
+Since 2007
 
 
-> A quote
-> 
-> --_(with attribution)^[And a footnote.]_
+
+
+## Data submitted used to identify patients within HES {.smaller}
+
++ NHS Number
++ Date of birth
++ Stated gender (though named `sex` and likely to have changed over time)
++ Postcode of patient place of residence
++ Local patient identifier
++ Local patient identifier provider (NHS Trust)
+
+No names (due to "data minimisation")
+
+No greater location precision than postcode (currently)
+
++ mean 15 properties, but up to 100, per postcode.
+
+## HES ID algorithm {background-color="#d1ffbd"}
+
+:::: {.columns}
+::: {.column width="70%"}
+
++ deterministic
++ stepwise
++ within NHS reporting year
++ __clusters__ HES records into disjoint sets
+
+:::
+
+::: {.column width="30%"}
+
+```{dot}
+//| fig-width: 3
+
+graph {
+  rankdir="LR";
+  node[shape="point", labelloc=c, labeljust=l]
+  fontname = "Helvetica,Arial,sans-serif";
+  bgcolor = "transparent";
+  
+  subgraph cluster_all {
+    style="rounded"
+    label="HES records"
+    
+  subgraph cluster_pid1 {
+    style="rounded"
+    label="HES ID 1"
+    bgcolor="#1b9e77"
+    a1
+    a2
+  }
+  
+  subgraph cluster_pid2 {
+    style="rounded"
+    label="HES ID 2"
+    bgcolor="#d95f02"
+    a3
+  }
+  
+  subgraph cluster_pid3 {
+    style="rounded"
+    label="HES ID 3"
+    bgcolor="#7570b3"
+    a4
+    a5
+  }
+  }
+}
+```
+
+:::
+::::
+
+
+## Person ID assignment algorithm (MPS) {background-color="#c5eafa"}
+
+### MPS: Master Patient Service
+
+:::: {.columns}
+::: {.column width="70%"}
+
+Used across NHS Digital's (directed) data collections (now within 
+NHS England).
+
++ deterministic
++ stepwise
++ based on data available at the point of algorithm execution
++ __Links__ each HES record to - at most - one identity
+
+:::
+
+::: {.column width="30%"}
+
+```{dot}
+//| fig-width: 3
+
+digraph {
+  rankdir="LR";
+  node[shape="point", labelloc=c, labeljust=l]
+  fontname = "Helvetica,Arial,sans-serif";
+  bgcolor = "transparent";
+    
+  subgraph cluster_records {
+    style="rounded"
+    label="HES records"
+    labeljust=l
+    a1
+    a2
+    a3
+    a4
+    a5
+    a6 [style="invis"]
+  }
+  
+  subgraph cluster_persons {
+    style="rounded"
+    label="Person IDs"
+    b1 [xlabel="A"]
+    b2 [xlabel="B"]
+    b3 [xlabel="C"]
+    b4 [style="invis"]
+  }
+  
+  a1->b1
+  a2->b1
+  a3->b2
+  a4->b3
+  a5->b3
+}
+```
+
+:::
+::::
+
+
+## Data source
+
+Assigned ID pairs (both HES ID and Person ID) for every record held:
+
++ APC, OP and AE datasets
++ 1997 onward
+
+Amounting to:
+
++ billion records
++ million distinct HES IDs
++ million distinct Person IDs
+
+## Uninformative, Simple, Merges, Splits and the Complex
+
+```{dot}
+//| fig-width: 6
+
+graph {
+rankdir="LR";
+labeljust=l
+labelloc = t;
+fontname = "Helvetica,Arial,sans-serif";
+bgcolor = "transparent";
+node [shape = oval, style = filled, labeljust=c, fillcolor = "#d1ffbd"];
+
+
+subgraph cluster_complex {
+label="Complex"
+
+{rank=same
+h6 h7
+}
+
+{rank=same
+p6 p7
+}
+
+h6 [label = "HES ID: 1"]
+h7 [label = "HES ID: 2"]
+p6 [label = "Person ID: A", fillcolor = "#c5eafa"]
+p7 [label = "Person ID: B", fillcolor = "#c5eafa"]
+
+h6 -- {p6 p7}
+h7 -- p7
+}
+
+
+subgraph cluster_split {
+label="Split"
+
+h5 [label = "HES ID: 1"]
+p4 [label = "Person ID: A", fillcolor = "#c5eafa"]
+p5 [label = "Person ID: B", fillcolor = "#c5eafa"]
+
+{rank=same
+p4 p5
+}
+
+h5 -- {p4 p5}
+}
+
+
+subgraph cluster_merge {
+label="Merge"
+
+h3 [label = "HES ID: 1"]
+h4 [label = "HES ID: 2"]
+p3 [label = "Person ID: A", fillcolor = "#c5eafa"]
+
+{rank=same
+h3 h4
+}
+
+{h3 h4} -- p3
+}
+
+subgraph cluster_simple {
+label="Simple"
+
+h2 [label = "HES ID: 1"]
+p2 [label = "Person ID: A", fillcolor = "#c5eafa"]
+
+h2 -- p2
+h2 -- p2
+}
+
+
+
+subgraph cluster_uninformative {
+label="\"Uninformative\""
+
+h1 [label = "HES ID: 1"]
+p1 [label = "Person ID: A", fillcolor = "#c5eafa"]
+
+h1 -- p1;
+}
+
+}
+```
 
 
 ## Slide 3: columns
@@ -52,31 +310,7 @@ _Italicised text in right column_
 :::
 ::::
 
-## Slide 4: a graph
 
-```{dot}
-//| fig-width: 2
-
-digraph Dataflow {
-  rankdir="TB";
-	labelloc = t;
-	fontname = "Helvetica,Arial,sans-serif";
-	bgcolor = "transparent";
-  node [shape = circle, style = filled, fillcolor = Linen];
-  input [label = "Start", fillcolor = lightgreen];
-  d [label = "Finish", fillcolor = lightblue];
-  a [label = "a"]
-  b [label = "b"]
-  c [label = "c"]
-
-  input -> {a b d}
-  {a b} -> c
-  b -> d
-  c -> d
-
-}
-
-```
 
 ## Slide 5: Size text to fit
 
