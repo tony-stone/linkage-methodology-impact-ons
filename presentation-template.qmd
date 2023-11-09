@@ -1,63 +1,73 @@
 ---
-title: "Presentation title"
-subtitle: "Presentation subtitle"
-author: "Tony Stone, UCL / Unversity of Sheffield"
+title: "Which people are most affected by changes to data linkage methodology?"
+subtitle: "An exploration of patient, organisational and spatiotemporal characteristics in administrative hospital data in England"
+author: "Tony Stone, UCL / University of Sheffield"
 date: 2023-11-16
 date-format: "D MMM YYYY"
 format: 
   revealjs:
     logo: imgs/logo.png
     theme: solarized
+bibliography: adruk-conf.bib
+csl: vancouver.csl
+nocite: |
+  @*
+css: styles.css
 ---
 
-## Slide Title 1 {.smaller}
+## Context {.smaller}
 
-
-A [link](https://www.github.com/UCL-ECHILD)
-
-<center>Centre something</center>
-
-1. numbered list item 1
-    1. numbered sublist item 1
-    
-* list item 1
-    * sublist item 1
-    
-> A quote
-> 
-> --_(with attribution)^[And a footnote.]_
-
++ NHS England (née Digital) operate various data services/collections for/from 
+organisations receiving funds from the NHS England
++ In 2021 NHS Digital changed how they assign records to an _individual_ within 
+their hospital episode statistics (HES) datasets
++ HES is a very widely used administrative health data collection in England, 
+by
+    + Providers
+    + Commissioners
+    + Researchers (inc. within the UK's national statistics institute)
 
 ::: {.notes}
 Slide notes
 :::
 
-## HES datasets {.smaller}
+## What are the HES datasets {.smaller}
 
-Care funded by the English NHS or taking place in a NHS funded hospital in 
-England.
++ event based records at the patient-activity level
++ for specific types of care provision
++ funded by the English NHS -OR- taking place in a NHS hospital in England.
 
-### Admitted patient care
+:::: {.columns}
+::: {.column width="33%" .col-no-border}
 
-Admitted to hospital
-Since 1989 but NHS Number only mandated since 1997
+### Admitted patient care (APC)
 
-### Outpatient appointments
++ Admitted to hospital (inc. day case admissions)
++ Since 1989 but NHS Number only mandated since 1997
++ Additional HES Critical Care (CC) dataset available
 
-Since 2003
+:::
+::: {.column width="33%" .col-left-border}
 
-### Accident and Emergency
+### Outpatient (OP) appointments
 
-Non-admitted unscheduled care
++ Attended and unattended
++ Since 2003
 
-+ ED + UCC
-+ MIU
-+ WIC
+:::
+::: {.column width="33%" .col-left-border}
 
-Since 2007
+### Accident and Emergency (A&E)
 
++ Non-admitted unscheduled(-ish) care at
+    + ED
+    + UCC
+    + MIU
+    + WIC
++ From 2007 to 2020
 
-
+:::
+::::
 
 ## Data submitted used to identify patients within HES {.smaller}
 
@@ -68,11 +78,11 @@ Since 2007
 + Local patient identifier
 + Local patient identifier provider (NHS Trust)
 
-No names (due to "data minimisation")
+### What's not available
 
-No greater location precision than postcode (currently)
-
-+ mean 15 properties, but up to 100, per postcode.
++ Names
++ Address precision better than postcode
+    + 15 properties, but up to 100, per postcode.
 
 ## HES ID algorithm {background-color="#d1ffbd"}
 
@@ -81,7 +91,6 @@ No greater location precision than postcode (currently)
 
 + deterministic
 + stepwise
-+ within NHS reporting year
 + __clusters__ HES records into disjoint sets
 
 :::
@@ -93,7 +102,7 @@ No greater location precision than postcode (currently)
 
 graph {
   rankdir="LR";
-  node[shape="point", labelloc=c, labeljust=l]
+  node[shape="point", labelloc=c, labeljust=r]
   fontname = "Helvetica,Arial,sans-serif";
   bgcolor = "transparent";
   
@@ -138,8 +147,7 @@ graph {
 :::: {.columns}
 ::: {.column width="70%"}
 
-Used across NHS Digital's (directed) data collections (now within 
-NHS England).
+Used across NHS Digital/England's "directed" data collections.
 
 + deterministic
 + stepwise
@@ -194,10 +202,11 @@ digraph {
 
 ## Data source
 
-Assigned ID pairs (both HES ID and Person ID) for every record held:
+Patients aged 55 or less at date of activity in:
 
-+ APC, OP and AE datasets
-+ 1997 onward
++ APC 1997 - 2021
++ OP 2003 - 2021
++ AE 2007 - 2020
 
 Amounting to:
 
@@ -312,8 +321,7 @@ _Italicised text in right column_
 
 
 
-## Slide 5: Size text to fit
+## References {.smaller}
 
-::: {.r-fit-text}
-text to fit
+::: {#refs}
 :::
