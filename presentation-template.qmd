@@ -18,9 +18,9 @@ css: styles.css
 ## Context {.smaller}
 
 + NHS England (née Digital) operate various data services/collections for/from 
-organisations receiving funds from the NHS England
+organisations receiving funds from the NHS in England
 + In 2021 NHS Digital changed how they assign records to an _individual_ within 
-their hospital episode statistics (HES) datasets
+their hospital episode statistics (HES) datasets, the first change in 12 years
 + HES is a very widely used administrative health data collection in England, 
 by
     + Providers
