@@ -60,10 +60,10 @@ Slide notes
 ### Accident and Emergency (A&E)
 
 + Non-admitted unscheduled(-ish) care at
-    + ED
-    + UCC
-    + MIU
-    + WIC
+    + Emergency Departments
+    + Urgent Care Centres
+    + Minor Injury Units
+    + Walk-in Centres
 + From 2007 to 2020
 
 :::
@@ -202,12 +202,11 @@ digraph {
 
 ## Data source
 
-Patients aged 55 or less at date of activity in:
++ HES datasets
++ April 2007 - March 2020 (13 years)
++ Patients aged 55 or less at date of activity (i.e. must have date of birth)
 
-+ APC, OP, A&E
-+ April 2007 - March 2020
-
-Amounting to:
+Amounts to:
 
 + 979 million records
 + 59 million distinct HES IDs
@@ -318,23 +317,57 @@ h1 -- p1;
 :::
 ::::
 
-## Slide 3: columns
+## Features investgated
 
-:::: {.columns}
-::: {.column width="75%"}
+First reported:
++ Age (grouped: Infants, Children, Young Adults, Adults)
++ Gender
++ Ethnicity
++ Index of deprivation quintile
++ Year of activity
 
-__Emphasised text in left column__
+And:
++ Total activity records (grouped into quintiles)
 
-:::
+## Results
 
-::: {.column width="25%"}
-
-_Italicised text in right column_
-
-:::
-::::
+```{r}
+library(data.table)
+library(ggplot2)
 
 
+regression_results <- readRDS("data/regression_results.rds")
+
+regression_results[, ':=' (est = exp(est_log),
+                           est_low95 = exp(est_log - qnorm(0.975)*est_se_log),
+                           est_high95 = exp(est_log + qnorm(0.975)*est_se_log))]
+
+
+dodger = position_dodge(width = 0.5)
+
+ggplot(regression_results, aes(y = est, x = param, colour = model)) +
+  geom_pointrange(aes(ymin = est_low95, ymax = est_high95),
+                  position = dodger) +
+    scale_x_discrete(limits=rev) +
+  geom_hline(yintercept = 1.0, color = "blue") +
+  scale_y_log10(breaks = c(0.2, 0.5, 1.0, 2.0, 5.0),
+                minor_breaks = NULL) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(y = "Odds ratio (logarithmic scale)", x = NULL) +
+  coord_flip(ylim = c(0.1, 10)) +
+  theme_minimal()
+
+```
+
+## Disscussion
+
++ Changes act at the fringes (91% records unchanged)
++ Most group wise differences are small
++ Greatest differences likely due to:
+    + location information (as key component in linkage)
+    + improved data recording / verification by Trusts
++ Deprivation still a factor
++ Reason for activity not investigated in this work
 
 ## References {.smaller}
 
