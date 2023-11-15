@@ -12,3 +12,7 @@
   height: auto;
   padding: 0 0.2em 0 0.2em;
 }
+
+.reveal table {
+  font-size: 1.4rem;
+}

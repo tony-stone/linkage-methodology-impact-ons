@@ -204,20 +204,33 @@ digraph {
 
 Patients aged 55 or less at date of activity in:
 
-+ APC 1997 - 2021
-+ OP 2003 - 2021
-+ AE 2007 - 2020
++ APC, OP, A&E
++ April 2007 - March 2020
 
 Amounting to:
 
-+ billion records
-+ million distinct HES IDs
-+ million distinct Person IDs
++ 979 million records
++ 59 million distinct HES IDs
++ 55 million distinct Person IDs
++ 60 million distinct (HES ID, Person ID)-pairs
 
 ## Uninformative, Simple, Merges, Splits and the Complex
 
+:::: {.columns}
+::: {.column width="60%"}
+
+| categorisation | records | distinct pairs | HES IDs | Person IDs |
+|----------------|--------:|---------------:|--------:|-----------:|
+| "Uninformative"| 9.3M    | -              | -       | -          |
+| Simple         | 881.3M  | 42.1M          | -       | -          |
+| Merge (HES ID) | 69.0M   | 6.5M           | -       | 2.5M       |
+| Split (HES ID) | 13.2M   | 1.1M           | 0.4M    | -          |
+| Complex        | 6.6M    | 0.6M           | 0.4M    | 0.4M       |
+
+:::
+::: {.column width="40%"}
 ```{dot}
-//| fig-width: 6
+//| fig-width: 4
 
 graph {
 rankdir="LR";
@@ -302,6 +315,8 @@ h1 -- p1;
 }
 ```
 
+:::
+::::
 
 ## Slide 3: columns
 
