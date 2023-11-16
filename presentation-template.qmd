@@ -142,7 +142,7 @@ graph {
 
 ## Person ID assignment algorithm (MPS) {background-color="#c5eafa"}
 
-### MPS: Master Patient Service
+### MPS: Master Person Service
 
 :::: {.columns}
 ::: {.column width="70%"}
