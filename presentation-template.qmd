@@ -369,6 +369,26 @@ ggplot(regression_results, aes(y = est, x = param, colour = model)) +
 + Deprivation still a factor
 + Reason for activity not investigated in this work
 
+## Acknowledgements {.smaller}
+
+We gratefully acknowledge all the patients whose de-identified data 
+are used in this research.  
+
+This work uses data provided by patients and collected by the National Health 
+Service as part of their care and support. Source data can also be accessed by 
+researchers by applying to NHS England.
+
+This work is/was supported by ADR UK (Administrative Data Research UK), an 
+Economic and Social Research Council (part of UK Research and Innovation) 
+programme.
+
+This research benefits from and contributes to the NIHR Children and Families 
+Policy Research Unit, but was not commissioned by the National Institute for 
+Health Research (NIHR) Policy Research Programme. The views expressed are 
+those of the author(s) and not necessarily those of the NIHR or the Department 
+of Health and Social Care. 
+
+
 ## References {.smaller}
 
 ::: {#refs}
