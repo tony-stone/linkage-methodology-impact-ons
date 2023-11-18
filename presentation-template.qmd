@@ -320,6 +320,7 @@ h1 -- p1;
 ## Features investgated
 
 First reported:
+
 + Age (grouped: Infants, Children, Young Adults, Adults)
 + Gender
 + Ethnicity
@@ -327,6 +328,7 @@ First reported:
 + Year of activity
 
 And:
+
 + Total activity records (grouped into quintiles)
 
 ## Results
