@@ -2,7 +2,7 @@
 title: "Which people are most affected by changes to data linkage methodology?"
 subtitle: "An exploration of patient, organisational and spatiotemporal characteristics in administrative hospital data in England"
 author: "Tony Stone, UCL / University of Sheffield"
-date: 2023-11-16
+date: 2024-03-06
 date-format: "D MMM YYYY"
 format: 
   revealjs:
