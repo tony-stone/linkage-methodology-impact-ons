@@ -265,8 +265,8 @@ subgraph cluster_split {
 label="Split"
 
 h5 [label = "HES ID: 1"]
-p4 [label = "Person ID: A", fillcolor = "#c5eafa"]
-p5 [label = "Person ID: B", fillcolor = "#c5eafa"]
+p4 [label = "Person ID: B", fillcolor = "#c5eafa"]
+p5 [label = "Person ID: A", fillcolor = "#c5eafa"]
 
 {rank=same
 p4 p5
