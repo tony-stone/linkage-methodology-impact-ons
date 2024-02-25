@@ -8,7 +8,7 @@ format:
   revealjs:
     logo: imgs/logo.png
     theme: solarized
-bibliography: adruk-conf.bib
+bibliography: refs.bib
 csl: vancouver.csl
 nocite: |
   @*
