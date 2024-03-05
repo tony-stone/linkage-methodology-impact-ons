@@ -321,42 +321,23 @@ h1 -- p1;
 ### An alternative conceptulisation
 
 ```{dot}
-//| fig-width: 4
 
 graph {
-  rankdir="LR";
+  rankdir="TB";
   labeljust=l
   labelloc = t;
   fontname = "Helvetica,Arial,sans-serif";
   bgcolor = "transparent";
   node [shape = oval, style = filled, labeljust=c, fillcolor = "#d1ffbd"];
   
-  
-  subgraph cluster_complex {
-    label="Split (diameter: 2+)"
-  
-    r8 [label = "HID: 1\nPID: A"]
-    r9 [label = "HID: 1\nPID: B"]
-    r10 [label = "HID: 2\nPID: B"]
+  subgraph cluster_uninformative_simple {
+    label="\"Uninformative\" and Simple (diameter: 0) "
     
-    r8 -- r9
-    r9 -- r10
+    r1 [label = "HID: 1\nPID: A"]
   }
-  
-  subgraph cluster_split {
-    label="Split (diameter: 1)"
-  
-    r5 [label = "HID: 1\nPID: A"]
-    r6 [label = "HID: 1\nPID: B"]
-    r7 [label = "HID: 1\nPID: C"]
-    
-    r5 -- {r6 r7}
-    r6 -- r7
-  }
-  
   
   subgraph cluster_merge {
-    label="Merge (diameter: 1)"
+    label="Merge (diameter: 1) "
     
     r2 [label = "HID: 1\nPID: A"]
     r3 [label = "HID: 2\nPID: A"]
@@ -366,29 +347,44 @@ graph {
     r3 -- r4
   }
   
-  subgraph cluster_uninformative_simple {
-    label="\"Uninformative\" and Simple (diameter: 0)"
+  subgraph cluster_split {
+    label="Split (diameter: 1) "
+  
+    r5 [label = "HID: 1\nPID: A"]
+    r6 [label = "HID: 1\nPID: B"]
+    r7 [label = "HID: 1\nPID: C"]
     
-    r1 [label = "HID: 1\nPID: A"]
+    r5 -- {r6 r7}
+    r6 -- r7
   }
-
+  
+  subgraph cluster_complex {
+    label="Complex (diameter: 2+) "
+  
+    r8 [label = "HID: 1\nPID: A"]
+    r9 [label = "HID: 1\nPID: B"]
+    r10 [label = "HID: 2\nPID: B"]
+    
+    r8 -- r9
+    r9 -- r10
+  }
 }
 ```
 
 
-## Features investgated
+## Features investigated {.smaller}
 
 First reported:
 
-+ Age (grouped: Infants, Children, Young Adults, Adults)
-+ Gender
++ Age (grouped: Infants; Children; Young Adults; Adults)
++ Gender (Female or Male only^[Removed records for which gender not stated/unknown impacting only the "Split" category, for which this represents 5% of records.])
 + Ethnicity
 + Index of deprivation quintile
 + Year of activity
 
 And:
 
-+ Total activity records (grouped into quintiles)
++ Total number of activity records (grouped into quintiles)
 
 ## Results
 
