@@ -317,6 +317,65 @@ h1 -- p1;
 :::
 ::::
 
+## Uninformative, Simple, Merges, Splits and the Complex
+### An alternative conceptulisation
+
+```{dot}
+//| fig-width: 4
+
+graph {
+  rankdir="LR";
+  labeljust=l
+  labelloc = t;
+  fontname = "Helvetica,Arial,sans-serif";
+  bgcolor = "transparent";
+  node [shape = oval, style = filled, labeljust=c, fillcolor = "#d1ffbd"];
+  
+  
+  subgraph cluster_complex {
+    label="Split (diameter: 2+)"
+  
+    r8 [label = "HID: 1\nPID: A"]
+    r9 [label = "HID: 1\nPID: B"]
+    r10 [label = "HID: 2\nPID: B"]
+    
+    r8 -- r9
+    r9 -- r10
+  }
+  
+  subgraph cluster_split {
+    label="Split (diameter: 1)"
+  
+    r5 [label = "HID: 1\nPID: A"]
+    r6 [label = "HID: 1\nPID: B"]
+    r7 [label = "HID: 1\nPID: C"]
+    
+    r5 -- {r6 r7}
+    r6 -- r7
+  }
+  
+  
+  subgraph cluster_merge {
+    label="Merge (diameter: 1)"
+    
+    r2 [label = "HID: 1\nPID: A"]
+    r3 [label = "HID: 2\nPID: A"]
+    r4 [label = "HID: 3\nPID: A"]
+    
+    r2 -- {r3 r4}
+    r3 -- r4
+  }
+  
+  subgraph cluster_uninformative_simple {
+    label="\"Uninformative\" and Simple (diameter: 0)"
+    
+    r1 [label = "HID: 1\nPID: A"]
+  }
+
+}
+```
+
+
 ## Features investgated
 
 First reported:
